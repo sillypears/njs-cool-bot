@@ -1,5 +1,7 @@
 require('dotenv').config();
 const Discord = require('discord.js');
+const Koa = require('koa');
+
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 const botCommands = require('./commands');
@@ -9,6 +11,8 @@ Object.keys(botCommands).map(key => {
 });
 
 const TOKEN = process.env.DISCORD_TOKEN;
+const PORT = process.env.PORT;
+
 
 bot.login(TOKEN);
 bot.on('ready', () => {
@@ -28,4 +32,10 @@ bot.on('message', msg => {
         console.error(error);
         msg.reply('there was an error trying to execute that command!');
     }
+});
+
+const app = new Koa();
+app.listen(PORT);
+app.use(async ctx => {
+    ctx.body = "That's cool";
 });
