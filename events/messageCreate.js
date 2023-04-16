@@ -10,7 +10,6 @@ module.exports = {
             m = r.exec(c)
             m.forEach((match, index) => {
                 console.log(match)
-                
             })
         }
 	}
